@@ -1,31 +1,7 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +11,45 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.app-wrapper {
+  display: grid;
+  width: 80vw;
+  margin: 0 auto;
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
+  grid-gap: 10px;
+  grid-template-areas:
+      'h h'
+      'n c';
+}
+
+.header {
+  background-color: cornflowerblue;
+  grid-area: h;
+  height: 50px;
+}
+
+.header .App-logo {
+  height: 50px;
+  pointer-events: none;
+}
+
+.nav {
+  grid-area: n;
+  background-color: gainsboro;
+}
+
+.content {
+  grid-area: c;
+}
+
+.content .profile-header {
+  background-image: url("https://wallpapershome.com/images/pages/ico_h/23164.png");
+  height: 200px;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
