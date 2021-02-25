@@ -1,0 +1,14 @@
+.nav {
+    grid-area: n;
+    background-color: gainsboro;
+    padding: 10px;
+}
+
+.item {
+    color: grey;
+    margin: 5px;
+}
+
+.item.active {
+    color: cornflowerblue;
+}

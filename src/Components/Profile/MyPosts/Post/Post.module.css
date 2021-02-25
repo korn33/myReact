@@ -1,0 +1,41 @@
+.post  {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    align-content: space-around;
+}
+
+.mainContent {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    align-content: space-around;
+}
+
+.elemPost {
+    margin: 5px;
+    padding: 5px;
+    flex: 0 1 auto;
+    align-self: flex-start;
+}
+
+.avatar {
+    background-image: url("https://api-private.atlassian.com/users/76b5ba3b3a0c11fd98684b448bd9b3d9/avatar");
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-size: contain;
+    align-self: center;
+}
+
+.text {
+    color: black;
+    align-self: center;
+    margin-bottom: 10px;
+}
+
+.like {
+    font-size: small;
+    margin-left: 29px;
+    margin-top: -10px;
+}

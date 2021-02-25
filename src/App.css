@@ -1,18 +1,3 @@
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .app-wrapper {
   display: grid;
   width: 80vw;
@@ -23,33 +8,4 @@
   grid-template-areas:
       'h h'
       'n c';
-}
-
-.header {
-  background-color: cornflowerblue;
-  grid-area: h;
-  height: 50px;
-}
-
-.header .App-logo {
-  height: 50px;
-  pointer-events: none;
-}
-
-.nav {
-  grid-area: n;
-  background-color: gainsboro;
-}
-
-.content {
-  grid-area: c;
-}
-
-.content .profile-header {
-  background-image: url("https://wallpapershome.com/images/pages/ico_h/23164.png");
-  height: 200px;
-  width: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
 }
