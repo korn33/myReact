@@ -1,14 +1,26 @@
 .nav {
-    grid-area: n;
     background-color: gainsboro;
     padding: 10px;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .item {
-    color: grey;
     margin: 5px;
 }
 
-.item.active {
+a.activeLink {
     color: cornflowerblue;
+}
+
+.navBox {
+    grid-area: n;
+    z-index: 1;
+    position: fixed;
+    margin-top: 70px;
+    width: 13%;
+}
+
+a {
+    color: #454242;
 }

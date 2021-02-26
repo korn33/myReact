@@ -1,0 +1,34 @@
+.dialogsPage {
+    display: flex;
+    height: 80vh;
+}
+
+.dialogsSection {
+    width: 15vw;
+    margin: 5px;
+}
+
+.dialogItem {
+    margin: 5px;
+}
+
+.dialogItem .active {
+    color: #7996fc;
+}
+
+.sectionSeparator {
+    background: linear-gradient(0deg, #fff, #7996fc 20%, #7996fc 80%, #fff);
+    width: 2px;
+}
+
+.messagesSection {
+    margin: 5px;
+}
+
+.messagesSection:last-child {
+    align-self: flex-end;
+}
+
+.messageItem {
+    margin: 5px;
+}
