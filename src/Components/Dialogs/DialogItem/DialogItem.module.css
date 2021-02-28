@@ -1,0 +1,20 @@
+.dialogItem {
+    margin: 5px;
+    display: flex;
+}
+
+.dialogItem > * {
+    margin: 5px;
+    padding: 5px;
+    align-self: center;
+}
+
+.dialogItem .active {
+    color: #7996fc;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}

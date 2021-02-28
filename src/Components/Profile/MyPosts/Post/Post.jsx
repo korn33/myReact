@@ -8,7 +8,7 @@ const Post = (props) => {
                 <div className={`${s.avatar} ${s.elemPost}`}></div>
                 <div className={`${s.text} ${s.elemPost}`}>{props.text}</div>
             </div>
-            <div className={`${s.like} ${s.elemPost}`}>{`Like (${props.likeCounter})`}</div>
+            <div className={`${s.like} ${s.elemPost}`}>{`Like (${props.likeCounter} people like this)`}</div>
         </div>
     )
 };

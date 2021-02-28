@@ -1,34 +1,25 @@
 import React from "react";
 import s from './Dialogs.module.css';
-import {NavLink} from "react-router-dom";
+import DialogItem from "./DialogItem/DialogItem";
+import UserMessage from "./UserMessage/UserMessage";
 
 const Dialogs = (props) => {
+    const dialogsData = {
+        userDialogsComponents: props.state.dialogs.map(u_d => <DialogItem name={u_d.name} id={u_d.id}/>),
+        userMessagesComponents: props.state.messages.map(u_m => <UserMessage message={u_m.message}/>)
+    };
     return (
         <div className={s.dialogsPage}>
             <div className={s.dialogsSection}>
-                <div className={s.dialogItem}>
-                    <NavLink to = '/Dialogs/id1' activeClassName={s.active}>Sasha</NavLink>
-                </div>
-                <div className={s.dialogItem}>
-                    <NavLink to = '/Dialogs/id2' activeClassName={s.active}>Lesha</NavLink>
-                </div>
-                <div className={s.dialogItem}>
-                    <NavLink to = '/Dialogs/id3' activeClassName={s.active}>Dimon</NavLink>
-                </div>
+                {dialogsData.userDialogsComponents}
             </div>
+
             <div className={s.sectionSeparator}>
 
             </div>
+
             <div className={s.messagesSection}>
-                <div className={s.messageItem}>
-                    Yo
-                </div>
-                <div className={s.messageItem}>
-                    Ha Ha
-                </div>
-                <div className={s.messageItem}>
-                    Wats up?
-                </div>
+                {dialogsData.userMessagesComponents}
             </div>
         </div>
     )

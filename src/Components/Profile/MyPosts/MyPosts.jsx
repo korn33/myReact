@@ -2,15 +2,25 @@ import React from "react";
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 
-const MyPosts = () => {
+
+const MyPosts = (props) => {
+    const postsComponents = props.posts.map(p => <Post text={p.text} likeCounter={p.likeCounter}/>);
+
     return (
         <div>
-            my posts
+            <h3 className={s.myPostsHeader}>my posts</h3>
             <div>
-                <textarea></textarea>
-                <button>Опубликовать</button>
-                <Post text = 'Первый пост' likeCounter = '3'/>
-                <Post text = 'Второй пост' likeCounter = '7'/>
+                <div className={s.newPost}>
+                    <div>
+                        <textarea> </textarea>
+                    </div>
+                    <div>
+                        <button>Опубликовать</button>
+                    </div>
+                </div>
+                <div className={s.posts}>
+                    {postsComponents}
+                </div>
             </div>
         </div>
     )
