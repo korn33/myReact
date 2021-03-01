@@ -4,7 +4,18 @@ import Post from "./Post/Post";
 
 
 const MyPosts = (props) => {
-    const postsComponents = props.posts.map(p => <Post text={p.text} likeCounter={p.likeCounter}/>);
+    const postsComponents = props.state.posts.map(p => <Post text={p.text} likeCounter={p.likeCounter}/>);
+
+    const textArea = React.createRef();
+
+    const btnClick = () => {
+        props.addPost();
+    };
+
+    const textAriaOnChange = () => {
+        const text = textArea.current.value;
+        props.updateTextAria(text);
+    };
 
     return (
         <div>
@@ -12,10 +23,10 @@ const MyPosts = (props) => {
             <div>
                 <div className={s.newPost}>
                     <div>
-                        <textarea> </textarea>
+                        <textarea ref={textArea} onChange={textAriaOnChange} value={props.state.newPostText}> </textarea>
                     </div>
                     <div>
-                        <button>Опубликовать</button>
+                        <button onClick={btnClick}>Опубликовать</button>
                     </div>
                 </div>
                 <div className={s.posts}>

@@ -8,6 +8,13 @@ const Dialogs = (props) => {
         userDialogsComponents: props.state.dialogs.map(u_d => <DialogItem name={u_d.name} id={u_d.id}/>),
         userMessagesComponents: props.state.messages.map(u_m => <UserMessage message={u_m.message}/>)
     };
+
+    const newMessage = React.createRef();
+    const btnSendClick = () => {
+        const text = newMessage.current.value;
+        console.log(text);
+    };
+
     return (
         <div className={s.dialogsPage}>
             <div className={s.dialogsSection}>
@@ -20,6 +27,12 @@ const Dialogs = (props) => {
 
             <div className={s.messagesSection}>
                 {dialogsData.userMessagesComponents}
+                <div>
+                    <textarea ref={newMessage}> </textarea>
+                </div>
+                <div>
+                    <button onClick={btnSendClick}>Отправить</button>
+                </div>
             </div>
         </div>
     )
