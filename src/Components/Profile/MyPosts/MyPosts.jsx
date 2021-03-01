@@ -9,12 +9,12 @@ const MyPosts = (props) => {
     const textArea = React.createRef();
 
     const btnClick = () => {
-        props.addPost();
+        props.dispatch({type: 'ADD-POST'});
     };
 
     const textAriaOnChange = () => {
         const text = textArea.current.value;
-        props.updateTextAria(text);
+        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text});
     };
 
     return (

@@ -27,28 +27,31 @@ const store = {
 
         }
     },
-    getState() {
-        return this._state;
-    },
     _callSubscribe() {
         console.log('state changed');
+    },
+
+    getState() {
+        return this._state;
     },
     subscribe(observer) {
         this._callSubscribe = observer;
     },
-    addPost() {
-        const newPost = {
-            id: this._state.profilePage.posts.length+1,
-            text: this._state.profilePage.newPostText,
-            likeCounter: '0'
-        };
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this._callSubscribe(this._state);
-    },
-    updateNewPostText(newText) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscribe(this._state);
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newPost = {
+                id: this._state.profilePage.posts.length+1,
+                text: this._state.profilePage.newPostText,
+                likeCounter: '0'
+            };
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = '';
+            this._callSubscribe(this._state);
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscribe(this._state);
+        }
     }
 };
 
