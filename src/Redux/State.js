@@ -1,5 +1,7 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
+const SEND_MESSAGE = 'SEND_MESSAGE';
 
 const store = {
     _state: {
@@ -25,6 +27,7 @@ const store = {
                 {id: 2, name: 'Alexey'},
                 {id: 3, name: 'Valera'},
             ],
+            newMessageBody: '',
         },
         navbar: {}
     },
@@ -53,12 +56,26 @@ const store = {
             this._state.profilePage.newPostText = action.newText;
             console.log(action.newText);
             this._callSubscribe(this._state);
+        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+            this._state.dialogsPage.newMessageBody = action.body;
+            this._callSubscribe(this._state);
+        } else if (action.type === SEND_MESSAGE) {
+            const messageBody = this._state.dialogsPage.newMessageBody;
+            this._state.dialogsPage.newMessageBody = '';
+            this._state.dialogsPage.messages.push({
+                id: this._state.dialogsPage.messages.length + 1,
+                message: messageBody
+            });
+            this._callSubscribe(this._state);
         }
     }
 };
 
 export const addPostActionCreator = () => ({type: ADD_POST});
 export const updateNewPostTextActonCreator = newText => ({type: UPDATE_NEW_POST_TEXT, newText: newText});
+
+export const updateNewMessageBodyCreator = (body) => ({type: UPDATE_NEW_MESSAGE_BODY, body: body});
+export const sendMessageCreator = () => ({type: SEND_MESSAGE});
 
 window.state = store.getState();
 

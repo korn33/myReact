@@ -2,6 +2,7 @@ import React from "react";
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import UserMessage from "./UserMessage/UserMessage";
+import {sendMessageCreator, updateNewMessageBodyCreator} from "../../Redux/State";
 
 const Dialogs = (props) => {
     const dialogsData = {
@@ -9,10 +10,13 @@ const Dialogs = (props) => {
         userMessagesComponents: props.state.messages.map(u_m => <UserMessage message={u_m.message}/>)
     };
 
-    const newMessage = React.createRef();
     const btnSendClick = () => {
-        const text = newMessage.current.value;
-        console.log(text);
+        props.dispatch(sendMessageCreator());
+    };
+
+    const onChangeNewMessageBody = (e) => {
+        const newValue = e.currentTarget.value;
+        props.dispatch(updateNewMessageBodyCreator(newValue));
     };
 
     return (
@@ -28,7 +32,7 @@ const Dialogs = (props) => {
             <div className={s.messagesSection}>
                 {dialogsData.userMessagesComponents}
                 <div>
-                    <textarea ref={newMessage}> </textarea>
+                    <textarea onChange={onChangeNewMessageBody} value={props.state.newMessageBody}> </textarea>
                 </div>
                 <div>
                     <button onClick={btnSendClick}>Отправить</button>
