@@ -8,7 +8,7 @@ const defaultState = {
         {id: 3, message: 'Wats up?'},
         {id: 4, message: 'Yo'},
         {id: 5, message: 'Yo'},
-        {id: 6, message: 'Yo'},
+        {id: 6, message: 'uuuuuuuuuuu'},
     ],
     dialogs: [
         {id: 1, name: 'Dimon'},

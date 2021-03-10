@@ -1,21 +1,22 @@
 import React from "react";
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {addPostActionCreator, updateNewPostTextActonCreator} from "../../../Redux/profileReducer";
 
 
 const MyPosts = (props) => {
-    const postsComponents = props.state.posts.map(p => <Post text={p.text} likeCounter={p.likeCounter}/>);
+    debugger;
+    const postsComponents = props.posts.map(p => <Post text={p.text} likeCounter={p.likeCounter}/>);
 
-    const textArea = React.createRef();
+    // const textArea = React.createRef();
 
     const btnClick = () => {
-        props.dispatch(addPostActionCreator());
+        props.addPost();
     };
 
-    const textAriaOnChange = () => {
-        const text = textArea.current.value;
-        props.dispatch(updateNewPostTextActonCreator(text));
+    const textAriaOnChange = (e) => {
+        const newText = e.currentTarget.value;
+        props.updateNewPostText(newText);
+
     };
 
     return (
@@ -24,7 +25,7 @@ const MyPosts = (props) => {
             <div>
                 <div className={s.newPost}>
                     <div>
-                        <textarea ref={textArea} onChange={textAriaOnChange} value={props.state.newPostText}> </textarea>
+                        <textarea onChange={textAriaOnChange} value={props.newPostText}> </textarea>
                     </div>
                     <div>
                         <button onClick={btnClick}>Опубликовать</button>

@@ -5,12 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './Redux/reduxStore';
 
-const render = (state) => {
+const render = () => {
     ReactDOM.render(
         <React.StrictMode>
-            <App state={state}
-                 dispatch={store.dispatch.bind(store)}
-            />
+            <App store={store}/>
         </React.StrictMode>,
         document.getElementById('root')
     );
@@ -19,7 +17,7 @@ const render = (state) => {
 render(store.getState());
 
 store.subscribe(() => {
-    render(store.getState())
+    render()
 });
 
 // If you want to start measuring performance in your app, pass a function
