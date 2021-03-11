@@ -5,8 +5,8 @@ import UserMessage from "./UserMessage/UserMessage";
 
 const Dialogs = (props) => {
     const dialogsData = {
-        userDialogsComponents: props.dialogs.map(u_d => <DialogItem name={u_d.name} id={u_d.id}/>),
-        userMessagesComponents: props.messages.map(u_m => <UserMessage message={u_m.message}/>)
+        userDialogsComponents: props.dialogs.map(u_d => <DialogItem name={u_d.name} id={u_d.id}  key={u_d.id}/>),
+        userMessagesComponents: props.messages.map(u_m => <UserMessage message={u_m.message} key={u_m.id}/>)
     };
 
     const btnSendClick = () => {

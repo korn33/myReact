@@ -4,10 +4,7 @@ import Post from "./Post/Post";
 
 
 const MyPosts = (props) => {
-    debugger;
-    const postsComponents = props.posts.map(p => <Post text={p.text} likeCounter={p.likeCounter}/>);
-
-    // const textArea = React.createRef();
+    const postsComponents = props.posts.map(p => <Post text={p.text} likeCounter={p.likeCounter} key={p.id}/>);
 
     const btnClick = () => {
         props.addPost();
