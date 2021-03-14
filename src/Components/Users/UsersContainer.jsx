@@ -1,13 +1,24 @@
 import React from "react";
 import {connect} from "react-redux";
 import Users from "./Users";
-import {followAC, getUsersCountAC, setCurrentPageAC, setUsersAC, unFollowAC} from "../../Redux/usersReducer";
+import {
+    followAC,
+    getUsersCountAC,
+    setCurrentPageAC,
+    setUsersAC,
+    toggleIsFetchingAC,
+    unFollowAC
+} from "../../Redux/usersReducer";
 import axios from "axios";
+import Preloader from "../common/Preloader/Preloader";
+import s from './Users.module.css';
 
 class UsersContainer extends React.Component {
     componentDidMount() {
+        this.props.toggleIsFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(responce => {
+                this.props.toggleIsFetching(false);
                 this.props.setUsers(responce.data.items);
                 this.props.getUsersCount(responce.data.totalCount);
             });
@@ -18,8 +29,7 @@ class UsersContainer extends React.Component {
         const countPages = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
         const currentPage = this.props.currentPage;
         switch (true) {
-            case currentPage <= 5:
-            {
+            case currentPage <= 5: {
                 for (let i = 1; i <= currentPage + 3; i++) {
                     pagesNumbers.push(i);
                 }
@@ -27,7 +37,7 @@ class UsersContainer extends React.Component {
                 pagesNumbers.push(countPages);
                 break;
             }
-            case ( (currentPage >= 6) && (currentPage <= countPages - 4) ): {
+            case ((currentPage >= 6) && (currentPage <= countPages - 4)): {
                 pagesNumbers.push(1);
                 pagesNumbers.push('...');
                 for (let i = currentPage - 3; i <= currentPage + 3; i++) {
@@ -45,7 +55,8 @@ class UsersContainer extends React.Component {
                 }
                 break;
             }
-            default: break;
+            default:
+                break;
         }
         return pagesNumbers;
     };
@@ -59,21 +70,26 @@ class UsersContainer extends React.Component {
 
     _setPage = (page) => {
         this.props.setCurrentPage(page);
+        this.props.toggleIsFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
             .then(responce => {
+                this.props.toggleIsFetching(false);
                 this.props.setUsers(responce.data.items);
             });
     };
 
     render() {
-        return <Users
+        return <>
+            {this.props.isFetching ? <div className={s.preloader}> <Preloader/> </div>: null}
+            <Users
                 getPagesNumbers={this.getPagesNumbers}
                 onPageNumberClick={this.onPageNumberClick}
                 unFollow={this.props.unFollow}
                 follow={this.props.follow}
                 currentPage={this.props.currentPage}
                 users={this.props.users}
-        />
+            />
+        </>
     }
 }
 
@@ -83,6 +99,7 @@ const mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         pageSize: state.usersPage.pageSize,
         currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching,
     }
 };
 
@@ -96,7 +113,7 @@ const mapDispatchToProps = (dispatch) => {
             const action = unFollowAC(userId);
             dispatch(action);
         },
-        setUsers:(users) => {
+        setUsers: (users) => {
             const action = setUsersAC(users);
             dispatch(action);
         },
@@ -106,6 +123,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         setCurrentPage: (pageNumber) => {
             const action = setCurrentPageAC(pageNumber);
+            dispatch(action);
+        },
+        toggleIsFetching: (isFetching) => {
+            const action = toggleIsFetchingAC(isFetching);
             dispatch(action);
         }
     }
