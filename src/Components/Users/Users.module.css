@@ -3,3 +3,30 @@
     height: 50px;
     border-radius: 50%;
 }
+
+.paginationViewer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pageNumber, .threeDots, .currentPage {
+    margin: 3px;
+    align-self: center;
+}
+
+.pageNumber, .threeDots {
+    color: #7996fc;
+    font-size: 14px;
+}
+
+.currentPage {
+    color: #223885;
+    font-size: 18px;
+}
+
+.pageNumber{
+    cursor: pointer;
+}
+.threeDots, .currentPage {
+    cursor: default;
+}
