@@ -12,11 +12,14 @@ import {
 import axios from "axios";
 import Preloader from "../common/Preloader/Preloader";
 import s from './Users.module.css';
+import {SERVER_URL} from "../../MainConstants";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`${SERVER_URL}/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+            withCredentials: true,
+        })
             .then(responce => {
                 this.props.toggleIsFetching(false);
                 this.props.setUsers(responce.data.items);
@@ -71,7 +74,7 @@ class UsersContainer extends React.Component {
     _setPage = (page) => {
         this.props.setCurrentPage(page);
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
+        axios.get(`${SERVER_URL}/users?page=${page}&count=${this.props.pageSize}`)
             .then(responce => {
                 this.props.toggleIsFetching(false);
                 this.props.setUsers(responce.data.items);

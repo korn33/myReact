@@ -7,7 +7,7 @@ const ProfileInfo = (props) => {
     const getContacts = (contacts) => {
         return Object.keys(contacts).map(property => {
             if (contacts[property] != null) {
-                return <li>{property}: <a target="_blank" href={`http://${contacts[property]}`}>{contacts[property]}</a>
+                return <li key={property}>{property}: <a target="_blank" href={`http://${contacts[property]}`}>{contacts[property]}</a>
                 </li>
             }
         })
