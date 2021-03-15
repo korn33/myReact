@@ -21,11 +21,26 @@
     z-index: 1;
     position: fixed;
     width: 100%;
+    display: flex;
+    justify-content: space-around;
 }
 
 .header .App_logo {
     height: 50px;
     pointer-events: none;
-    margin-left: 13%;
     margin-top: 5px;
+}
+
+.loginBlock {
+    align-self: center;
+}
+
+.loginBlock a {
+    text-decoration: none;
+    color: #454242;
+}
+
+.loginBlock a:hover {
+    color: white;
+    text-decoration: underline;
 }
