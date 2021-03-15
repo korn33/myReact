@@ -9,5 +9,48 @@
 }
 
 .profileInfo {
-    margin: 10px 5px 5px 5px;
+    margin: 10px 0 5px 0;
+    display: flex;
+}
+
+.photo {
+    width: 300px;
+    height: 300px;
+}
+
+.description {
+    margin: 10px 0px 5px 20px
+}
+
+.property {
+    color: #223885;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.contacts {
+    list-style-type: decimal;
+    margin: 2px;
+    padding-left: 25px;
+}
+
+.contacts a {
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+.contacts a:hover {
+    color: #223885;
+    text-decoration: underline;
+}
+
+.preloader {
+    z-index: 5;
+    position: absolute;
+    width: 67%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.7);
 }

@@ -9,7 +9,7 @@
     margin: 5px;
 }
 
-a.activeLink {
+.item a.activeLink {
     color: cornflowerblue;
 }
 
@@ -21,6 +21,6 @@ a.activeLink {
     width: 13%;
 }
 
-a {
+.item a {
     color: #454242;
 }

@@ -18,3 +18,7 @@
     height: 40px;
     border-radius: 50%;
 }
+
+.dialogItem a {
+    color: #454242;
+}

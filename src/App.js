@@ -10,6 +10,7 @@ import Settings from "./Components/Settings/Settings";
 import Friends from "./Components/Friends/Friends";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
+import ProfileComponent from "./Components/Profile/ProfileComponent";
 
 function App() {
     return (
@@ -17,7 +18,7 @@ function App() {
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Route path = '/Profile' render={ () => <Profile />  } />
+                <Route path = '/Profile/:userId?' render={ () => <ProfileComponent />  } />
                 <Route path = '/Dialogs' render={ () => <DialogsContainer />  } />
                 <Route path = '/Users' render={ () => <UsersContainer />  } />
                 <Route path = '/News' component = {News}/>
