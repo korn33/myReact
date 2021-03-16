@@ -1,0 +1,9 @@
+.message a {
+    text-decoration: none;
+    color: #223885;
+}
+
+.message a:hover {
+    color: #223885;
+    text-decoration: underline;
+}
