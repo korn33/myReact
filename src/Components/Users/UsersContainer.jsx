@@ -3,25 +3,16 @@ import {connect} from "react-redux";
 import Users from "./Users";
 import {
     follow,
-    getUsersCount,
     setCurrentPage,
-    setUsers,
-    toggleIsFetching, toggleFollowing,
-    unFollow
+    unFollow,
+    getUsers
 } from "../../Redux/usersReducer";
 import Preloader from "../common/Preloader/Preloader";
 import s from './Users.module.css';
-import {usersAPI} from "../common/API/Api";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.toggleIsFetching(true);
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-                .then(data => {
-                    this.props.toggleIsFetching(false);
-                    this.props.setUsers(data.items);
-                    this.props.getUsersCount(data.totalCount);
-            });
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
 
     getPagesNumbers = () => {
@@ -70,12 +61,7 @@ class UsersContainer extends React.Component {
 
     _setPage = (page) => {
         this.props.setCurrentPage(page);
-        this.props.toggleIsFetching(true);
-        usersAPI.getUsers(page, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(data.items);
-            });
+        this.props.getUsers(page, this.props.pageSize);
     };
 
     render() {
@@ -89,7 +75,6 @@ class UsersContainer extends React.Component {
                 currentPage={this.props.currentPage}
                 users={this.props.users}
                 toggleChangeFollowingInProgress={this.props.toggleChangeFollowingInProgress}
-                toggleFollowing={this.props.toggleFollowing}
             />
         </>
     }
@@ -109,11 +94,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
         follow,
         unFollow,
-        setUsers,
-        getUsersCount,
         setCurrentPage,
-        toggleIsFetching,
-        toggleFollowing,
+        getUsers,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);

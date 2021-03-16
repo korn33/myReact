@@ -1,3 +1,5 @@
+import {usersAPI} from "../Components/common/API/Api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -71,12 +73,44 @@ const usersReducer = (state = defaultState, action) => {
     }
 };
 
-export const follow = (userId) => ({type: FOLLOW, userId});
-export const unFollow = (userId) => ({type: UNFOLLOW, userId});
-export const setUsers = (users) => ({type: SET_USERS, users});
+const followSuccess = (userId) => ({type: FOLLOW, userId});
+const unFollowSuccess = (userId) => ({type: UNFOLLOW, userId});
+const setUsers = (users) => ({type: SET_USERS, users});
 export const getUsersCount = (count) => ({type: GET_USERS_COUNT, count});
 export const setCurrentPage = (pageNumber) => ({type: SET_PAGE_NUMBER, pageNumber});
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export const toggleFollowing = (isFetching, userId) => ({type: TOGGLE_FOLLOWING, isFetching, userId});
+
+export const getUsers = (currentPage, pageSize) => (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    usersAPI.getUsers(currentPage, pageSize)
+        .then(data => {
+            dispatch(toggleIsFetching(false));
+            dispatch(setUsers(data.items));
+            dispatch(getUsersCount(data.totalCount));
+        });
+};
+
+export const unFollow = (userId) => (dispatch) => {
+    dispatch(toggleFollowing(true, userId));
+    usersAPI.unFollowUser(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(unFollowSuccess(userId));
+                }
+                dispatch(toggleFollowing(false, userId));
+    });
+};
+
+export const follow = (userId) => (dispatch) => {
+    dispatch(toggleFollowing(true, userId));
+    usersAPI.followUser(userId)
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(followSuccess(userId));
+            }
+            dispatch(toggleFollowing(false, userId));
+        });
+};
 
 export default usersReducer;

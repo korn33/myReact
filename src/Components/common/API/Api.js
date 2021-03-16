@@ -17,7 +17,7 @@ export const usersAPI = {
             .then(responce => responce.data)
     },
     followUser(userId) {
-        return instance.post(`follow/${userId}`, {})
+        return instance.post(`follow/${userId}`)
             .then(responce => responce.data)
     },
     getUsers(currentPage, pageSize) {
