@@ -2,6 +2,7 @@ import React from "react";
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import avatarDefault from '../../../assets/img/avatarDefault.jpg';
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 const ProfileInfo = (props) => {
     const getContacts = (contacts) => {
@@ -20,15 +21,21 @@ const ProfileInfo = (props) => {
     }
     return (
         <div>
-            <div className={s.profileHeader}>
-            </div>
+            {/*<div className={s.profileHeader}>*/}
+            {/*</div>*/}
             <div className={s.profileInfo}>
                 <div>
                     <img className={s.photo} src={props.profile.photos.large ? props.profile.photos.large : avatarDefault} alt={props.profile.photos.small ? props.profile.photos.small : avatarDefault}/>
                 </div>
                 <div className={s.description}>
-                    <div><span className={s.property}>Name: </span><span>{props.profile.fullName}</span></div>
-                    <div><span className={s.property}>About me: </span><span>{props.profile.aboutMe}</span></div>
+                    <div>
+                        <span className={s.property}>Name: </span>
+                        <span>{props.profile.fullName}</span>
+                    </div>
+                    <div>
+                        <span className={s.property}>About me: </span>
+                        <ProfileStatus status={props.profile.aboutMe}/>
+                    </div>
                     <div>
                         <span className={s.property}>Contacts:</span>
                         <ul className={s.contacts}>
