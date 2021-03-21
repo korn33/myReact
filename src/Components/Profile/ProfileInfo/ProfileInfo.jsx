@@ -34,7 +34,11 @@ const ProfileInfo = (props) => {
                     </div>
                     <div>
                         <span className={s.property}>About me: </span>
-                        <ProfileStatus status={props.profile.aboutMe}/>
+                        <span className={s.property}>{props.profile.aboutMe}</span>
+                    </div>
+                    <div>
+                        <span className={s.property}>Status: </span>
+                        <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                     </div>
                     <div>
                         <span className={s.property}>Contacts:</span>
