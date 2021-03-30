@@ -14,6 +14,14 @@ class ProfileComponent extends React.Component {
         this.props.getUserStatus(userId);
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.status !== prevProps.status) {
+            this.setState({
+                status: this.props.status,
+            })
+        }
+    }
+
     render() {
         return <Profile {...this.props}/>
     }
