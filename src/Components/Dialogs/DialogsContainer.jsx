@@ -9,18 +9,13 @@ const mapStateToProps = (state) => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
-        newMessageBody: state.dialogsPage.newMessageBody,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onApdateNewMessageBody: (text) => {
-            const action = updateNewMessageBodyCreator(text);
-            dispatch(action);
-        },
-        onSendMessage: () => {
-            const action = sendMessageCreator();
+        onSendMessage: (newMessageBody) => {
+            const action = sendMessageCreator(newMessageBody);
             dispatch(action);
         },
     }

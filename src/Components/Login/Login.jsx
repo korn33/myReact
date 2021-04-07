@@ -2,7 +2,7 @@ import React from "react";
 import s from './Login.module.css';
 import {ErrorMessage, Field, Form, Formik, useFormik} from "formik";
 
-const SignupForm = () => {
+const SignupForm = (props) => {
     return (
         <Formik
             initialValues={{
@@ -11,7 +11,7 @@ const SignupForm = () => {
                 rememberMe: false,
             }}
             onSubmit={values => {
-                console.log(values);
+                props.onSubmit(values);
             }}
         >
             <Form>
@@ -37,13 +37,13 @@ const SignupForm = () => {
 };
 
 const Login = (props) => {
-    const test = () => {
-        console.log('test');
+    const foo = (values) => {
+        console.log(values);
     };
     return (<>
             <h1 className={s.message}>Need <a href={'https://social-network.samuraijs.com'} target="_blank">sign
                 in</a> or:</h1>
-            <SignupForm onSubmit={test}/>
+            <SignupForm onSubmit={foo}/>
         </>
     )
 };

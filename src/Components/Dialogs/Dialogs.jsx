@@ -2,6 +2,28 @@ import React from "react";
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import UserMessage from "./UserMessage/UserMessage";
+import {ErrorMessage, Field, Form, Formik} from "formik";
+
+const NewMessageForm = (props) => {
+    return (
+        <Formik
+            initialValues={{
+                newMessageBody: '',
+            }}
+            onSubmit={values => {
+                props.onSubmit(values.newMessageBody);
+            }}
+        >
+            <Form>
+                <div>
+                    <Field name="newMessageBody" type="text"/>
+                    <ErrorMessage name="newMessageBody"/>
+                </div>
+                <button type="submit">Send message</button>
+            </Form>
+        </Formik>
+    );
+};
 
 const Dialogs = (props) => {
     const dialogsData = {
@@ -9,13 +31,8 @@ const Dialogs = (props) => {
         userMessagesComponents: props.messages.map(u_m => <UserMessage message={u_m.message} key={u_m.id}/>)
     };
 
-    const btnSendClick = () => {
-        props.onSendMessage();
-    };
-
-    const onChangeNewMessageBody = (e) => {
-        const newValue = e.currentTarget.value;
-        props.onApdateNewMessageBody(newValue);
+    const btnSendClick = (newMessageBody) => {
+        props.onSendMessage(newMessageBody);
     };
 
     return (
@@ -30,12 +47,7 @@ const Dialogs = (props) => {
 
             <div className={s.messagesSection}>
                 {dialogsData.userMessagesComponents}
-                <div>
-                    <textarea onChange={onChangeNewMessageBody} value={props.newMessageBody}> </textarea>
-                </div>
-                <div>
-                    <button onClick={btnSendClick}>Отправить</button>
-                </div>
+                <NewMessageForm onSubmit={btnSendClick}/>
             </div>
         </div>
     )
