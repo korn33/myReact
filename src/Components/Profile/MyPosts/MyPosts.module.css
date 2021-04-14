@@ -6,3 +6,7 @@
 .newPost {
     margin: 5px;
 }
+
+.errorMessage {
+    color: red;
+}

@@ -1,7 +1,14 @@
 import React from "react";
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {ErrorMessage, Field, Form, Formik} from "formik";
+import {Field, Form, Formik} from "formik";
+import * as yup from 'yup';
+
+const maxSize = 10;
+
+const schema = yup.object().shape({
+    newPost: yup.string().max(maxSize, `maximum size ${maxSize}`),
+});
 
 const AddNewPostForm = (props) => {
     return (
@@ -12,14 +19,22 @@ const AddNewPostForm = (props) => {
             onSubmit={values => {
                 props.onSubmit(values.newPost);
             }}
+            validationSchema={schema}
         >
-            <Form>
-                <div>
-                    <Field name="newPost" type="text"/>
-                    <ErrorMessage name="newPost"/>
-                </div>
-                <button type="submit">Add Post</button>
-            </Form>
+            {({values, errors, touched, handleChange, handleBlur, isValid, handleSubmit, dirty}) => (
+                <Form>
+                    <div>
+                        <Field name="newPost" type="text"/>
+                    </div>
+                    {touched.newPost && errors.newPost && <p className={s.errorMessage}>{errors.newPost}</p>}
+                    <button
+                        type="submit"
+                        disabled={!(isValid && dirty)}
+                    >Add Post
+                    </button>
+                </Form>
+            )}
+
         </Formik>
     );
 };

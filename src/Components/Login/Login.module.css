@@ -7,3 +7,7 @@
     color: #223885;
     text-decoration: underline;
 }
+
+.errorMessage {
+    color: red;
+}
